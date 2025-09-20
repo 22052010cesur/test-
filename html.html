@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>Siniflər üzrə Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .btn {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      background: #007bff;
+      color: white;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+    .answer {
+      display: block;
+      margin: 5px auto;
+      padding: 10px;
+      width: 200px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background: white;
+    }
+    .answer.correct { background: #28a745; color: white; }
+    .answer.wrong { background: #dc3545; color: white; }
+  </style>
+</head>
+<body>
+
+  <h1>Siniflər üzrə Test Proqramı</h1>
+  <div id="app"></div>
+
+  <script>
+    const data = {
+      "10-ci sinif": {
+        "Riyaziyyat": [
+          { sual: "2x2 neçə edir?", cavablar: ["2", "4", "6"], duzgun: "4" },
+          { sual: "5+7 neçə edir?", cavablar: ["10", "11", "12"], duzgun: "12" }
+        ],
+        "Azərbaycan dili": [
+          { sual: "Azərbaycan əlifbasında neçə hərf var?", cavablar: ["30", "32", "34"], duzgun: "32" }
+        ]
+      },
+      "11-ci sinif": {
+        "Riyaziyyat": [
+          { sual: "sin(90°) neçədir?", cavablar: ["0", "1", "-1"], duzgun: "1" }
+        ]
+      }
+    };
+
+    const app = document.getElementById("app");
+
+    function showClasses() {
+      app.innerHTML = "<h2>Siniflər</h2>";
+      for (let sinif in data) {
+        let btn = document.createElement("button");
+        btn.className = "btn";
+        btn.innerText = sinif;
+        btn.onclick = () => showSubjects(sinif);
+        app.appendChild(btn);
+      }
+    }
+
+    function showSubjects(sinif) {
+      app.innerHTML = `<h2>${sinif} fənləri</h2>`;
+      for (let subject in data[sinif]) {
+        let btn = document.createElement("button");
+        btn.className = "btn";
+        btn.innerText = subject;
+        btn.onclick = () => startQuiz(sinif, subject);
+        app.appendChild(btn);
+      }
+      backButton(showClasses);
+    }
+
+    function startQuiz(sinif, subject) {
+      let suallar = data[sinif][subject];
+      let index = 0;
+
+      function showQuestion() {
+        if (index >= suallar.length) {
+          app.innerHTML = "<h2>Test bitdi!</h2>";
+          backButton(() => showSubjects(sinif));
+          return;
+        }
+
+        let s = suallar[index];
+        app.innerHTML = `<h3>${s.sual}</h3>`;
+        
+        s.cavablar.forEach(cavab => {
+          let btn = document.createElement("button");
+          btn.className = "answer";
+          btn.innerText = cavab;
+          btn.onclick = () => {
+            if (cavab === s.duzgun) {
+              btn.classList.add("correct");
+            } else {
+              btn.classList.add("wrong");
+            }
+            setTimeout(() => {
+              index++;
+              showQuestion();
+            }, 1000);
+          };
+          app.appendChild(btn);
+        });
+      }
+      showQuestion();
+    }
+
+    function backButton(callback) {
+      let btn = document.createElement("button");
+      btn.className = "btn";
+      btn.innerText = "← Geri";
+      btn.onclick = callback;
+      app.appendChild(btn);
+    }
+
+    showClasses();
+  </script>
+
+</body>
+</html>
