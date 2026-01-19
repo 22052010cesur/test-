@@ -1,584 +1,447 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <title>Qaydalar və Testlər</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; background: #f5f5f5; padding: 20px; }
-    .btn {
-      display: block; margin: 10px auto; padding: 10px 20px;
-      font-size: 18px; border-radius: 8px; cursor: pointer; border: none;
-      background: #007bff; color: white; transition: 0.3s;
-    }
-    .btn:hover { background: #0056b3; }
-    .answer {
-      display: block; margin: 5px auto; padding: 10px; width: 220px;
-      border-radius: 8px; cursor: pointer; border: 1px solid #ccc; background: white;
-    }
-    .answer.correct { background: #28a745; color: white; }
-    .answer.wrong { background: #dc3545; color: white; }
-    .text-box {
-      background: white; padding: 15px; border-radius: 8px;
-      margin: 20px auto; width: 80%; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Kids Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #00cec9;
+            --accent: #ff7675; 
+            --yellow: #fdcb6e;
+            --bg: #f0f3f7;
+            --dark: #2d3436;
+            --whatsapp: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-reg {
+            background: var(--primary);
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: radial-gradient(circle at 10% 20%, rgb(239, 246, 255) 0%, rgb(219, 228, 255) 100%);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-text span { color: var(--primary); }
+
+        .hero-img img {
+            width: 100%;
+            filter: drop-shadow(20px 20px 50px rgba(0,0,0,0.1));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Kurslar */
+        .courses { padding: 100px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            transition: 0.4s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .card i { font-size: 50px; margin-bottom: 20px; display: block; }
+
+        /* Haqqımızda */
+        .about { padding: 100px 0; background: white; }
+        .about-content { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.2rem; line-height: 1.8; }
+
+        /* Əlaqə Bölməsi */
+        .contact {
+            padding: 100px 0;
+            background: var(--primary);
+            border-radius: 50px 50px 0 0;
+            color: white;
+        }
+
+        .contact-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact-links { display: flex; flex-direction: column; gap: 20px; }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-item:hover { background: rgba(255, 255, 255, 0.2); transform: translateX(10px); }
+        .contact-item i { font-size: 30px; margin-right: 20px; }
+
+        .qr-card {
+            background: white;
+            padding: 40px;
+            border-radius: 40px;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .qr-frame {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border: 5px solid var(--primary);
+            border-radius: 20px;
+            padding: 10px;
+        }
+
+        .qr-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        footer { text-align: center; padding: 30px; background: #eee; }
+
+        @media (max-width: 768px) {
+            .hero-grid, .contact-box { grid-template-columns: 1fr; text-align: center; }
+            .nav-links { display: none; }
+            .hero-text h1 { font-size: 2.5rem; }
+        }
+
+        .photo-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        /* Çatbot Stilləri */
+        #chat-bubble {
+            position: fixed; bottom: 20px; right: 20px;
+            width: 65px; height: 65px; background: var(--primary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 28px; cursor: pointer; z-index: 2000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: 0.3s;
+        }
+        #chat-window {
+            position: fixed; bottom: 95px; right: 20px;
+            width: 330px; height: 480px; background: white;
+            border-radius: 25px; overflow: hidden; display: none;
+            flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 2000;
+            border: 1px solid #f0f0f0;
+        }
+        #chat-header { background: var(--primary); color: white; padding: 18px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        #chat-msgs { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #fafafa; }
+        .msg { padding: 10px 15px; border-radius: 18px; max-width: 85%; line-height: 1.5; font-size: 14px; }
+        .bot-msg { background: #eee; align-self: flex-start; border-bottom-left-radius: 2px; color: #333; }
+        .user-msg { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        #chat-input-area { display: flex; padding: 15px; border-top: 1px solid #eee; background: white; }
+        #chat-input { flex: 1; border: none; outline: none; font-size: 15px; }
+        #chat-send { background: none; border: none; color: var(--primary); font-weight: bold; cursor: pointer; font-size: 16px; }
+    </style>
 </head>
 <body>
 
-  <h1>📚 Qaydalar və 📝 Testlər</h1>
-  <div id="app"></div>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">🚀 <span>Kids center</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Ana Səhifə</a></li>
+                <li><a href="#courses">Kurslar</a></li>
+                <li><a href="#photo">Qiymetler</a></li>
+                <li><a href="#about">Haqqımızda</a></li>
+                <li><a href="#contact" class="btn-reg">Əlaqə</a></li>
+            </ul>
+        </div>
+    </nav>
 
-  <script>
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>Uşağınızın <span>Gələcəyi</span> Burada Başlayır!</h1>
+                <a href="#contact" class="btn-reg" style="padding: 18px 40px; font-size: 1.1rem; text-decoration: none; display: inline-block;">Əlaqə</a>
+            </div>
+            <div class="hero-img">
+                <img src="BADa99FEE-4CF6-49F1-A2F3-EC6F283784E3.jpg" alt="Hero">
+            </div>
+        </div>
+    </section>
 
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2 class="section-title">Populyar Bölmələrimiz</h2>
+            <div class="course-grid">
+                <div class="card"><i class="fas fa-robot" style="color:#fd79a8"></i><h3>Psixoloq</h3><p></p></div>
+                <div class="card"><i class="fas fa-language" style="color:#00b894"></i><h3>İngilis Dili</h3><p>Oyunla öyrənmə.</p></div>
+                <div class="card"><i class="fas fa-paint-brush" style="color:#0984e3"></i><h3>İncəsənət</h3><p>Rəsm və yaradıcılıq.</p></div>
+                <div class="card"><i class="fas fa-brain" style="color:#e17055"></i><h3>Məntiq</h3><p>Sürətli hesablama.</p></div>
+            </div>
+        </div>
+    </section>
 
+    <section id="photo" class="photo-section">
+        <div class="container">
+            <h2 class="section-title">Qiymetler</h2>
+            <div style="background: white; padding: 50px; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h3>Psixoloq xidməti (45 dəqiqə 20 manat)</h3>
+                <h3>Loqoped xidməti   (45 dəqiqə 20 manat)</h3>
+                <h3>Növbətçi Dayə xidməti  (1 saatı 25 manat)</h3>
+                <h3>Özəl pedaqoq xidməti  (45 dəqiqə 25 manat)</h3>
+            </div>
+        </div>
+    </section>
 
-  function startQuiz(sinif, fən) {
-    // sualları qarışdır
-    let suallar = shuffle([...testler[sinif][fən]]) || [];
-    let index = 0;
-    let duzgunSayi = 0;
-    let sehvSayi = 0;
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Haqqımızda</h2>
+            <div class="about-content">
+                <h2>Kids Center”ın məqsədi xüsusi qayğıya ehtiyacı olan uşaqları bağçaya adaptasiya etmək və valideynlərə dəstək verməkdir.</h2>
+                <p>Kids Center”da təlim prosesinə uşaqlar 2 – 8 yaş aralığında cəlb olunur və uşaqların maraqlarına uyğun olaraq beş qrup fəaliyyət göstərir. Biz həftənin 5 günü 9:00 – dan 18:00 – dək fəaliyyət göstəririk.</p>
+                <p>Burada rüblük uşaq inkişafı qiymətləndirilməsi aparılır və valideynlər üçün hesabatlar hazırlanır.</p>
+            </div>
+        </div>
+    </section>
 
-    function showQuestion() {
-      if (index >= suallar.length) {
-        let bal = duzgunSayi;
-        app.innerHTML = `<h2>Test bitdi!</h2>
-                         <p>Düzgün cavablar: ${duzgunSayi}</p>
-                         <p>Səhv cavablar: ${sehvSayi}</p>
-                         <p>Bal: ${bal} / ${suallar.length}</p>`;
-        backButton(() => showSubjects(sinif));
-        return;
-      }
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" style="color:white">Bizimlə Əlaqə</h2>
+            <div class="contact-box">
+                <div class="contact-links">
+                    <h3>Sürətli Əlaqə 🚀</h3>
+                    <a href="https://wa.me/994553906970" class="contact-item" target="_blank">
+                        <i class="fab fa-whatsapp" style="color:var(--whatsapp)"></i>
+                        <span>+994 55 390 69 70 (WhatsApp)</span>
+                    </a>
+                    <a href="mailto:kidscenter040@gmail.com" class="contact-item">
+                        <i class="fas fa-envelope" style="color:var(--yellow)"></i>
+                        <span>kidscenter040@gmail.com (Gmail)</span>
+                    </a>
+                    <a href="https://www.instagram.com/kidscenter__baku/" class="contact-item" target="_blank">
+                        <i class="fab fa-instagram" style="color:#ff7675"></i>
+                        <span>@kidscenter__baku (Instagram)</span>
+                    </a>
+                </div>
 
-      let s = suallar[index];
-      let cavablarQarisiq = shuffle([...s.cavablar]); // cavabları qarışdır
+                <div class="qr-card">
+                    <div class="qr-frame">
+                        <img src="BADam99FEE-4CF6-49F1-A2F3-EC6F283784E3.jpg" alt="QR">
+                    </div>
+                    <h3>Instagram QR Kodu</h3>
+                    <p>Skan et və səhifəmizə birbaşa keç!</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      app.innerHTML = `<h3>${fən} (${sinif})</h3><p>${s.sual}</p>`;
+    <footer>
+        <p>&copy; 2026 Kids Center. Bütün hüquqlar qorunur.</p>
+    </footer>
 
-      cavablarQarisiq.forEach(cavab => {
-        let btn = document.createElement("button");
-        btn.className = "answer";
-        btn.innerText = cavab;
+    <div id="chat-bubble" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></div>
 
-        btn.onclick = () => {
-          document.querySelectorAll(".answer").forEach(b => b.disabled = true);
+    <div id="chat-window">
+        <div id="chat-header">
+            <span>Kids Center Köməkçisi</span>
+            <span onclick="toggleChat()" style="cursor:pointer; font-size: 24px;">&times;</span>
+        </div>
+        <div id="chat-msgs">
+            <div class="msg bot-msg">Salam! Kids Center-ə xoş gəlmisiniz. Sizin üçün qiymətləri öyrənə bilərəm. Nə ilə maraqlanırsınız?</div>
+        </div>
+        <div id="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Məsələn: loqoped qiyməti..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <button id="chat-send" onclick="sendMessage()">Göndər</button>
+        </div>
+    </div>
 
-          if (cavab === s.duzgun) {
-            btn.classList.add("correct");
-            duzgunSayi++;
-          } else {
-            btn.classList.add("wrong");
-            sehvSayi++;
-            document.querySelectorAll(".answer").forEach(b => {
-              if (b.innerText === s.duzgun) b.classList.add("correct");
-            });
-          }
-
-          setTimeout(() => { 
-            index++; 
-            showQuestion(); 
-          }, 1000);
-        };
-
-        app.appendChild(btn);
-      });
-    }
-
-    showQuestion();
-  }
-  
-    const qaydalar = {
-      "1-ci sinif": "1-ci sinif üçün əsas qaydalar: Sadə oxuma, toplama və çıxma.",
-      "2-ci sinif": "2-ci sinif üçün qaydalar: Çoxaltma və bölmə, sadə cümlə qurmaq.",
-      "3-cü sinif": "3-cü sinif üçün qaydalar: Təbiət və cəmiyyət haqqında ilkin biliklər.",
-      "4-cü sinif": "4-cü sinif üçün qaydalar: Mürəkkəb cümlələr və onluq say sistemi.",
-      "5-ci sinif": "5-ci sinif üçün qaydalar: Orta məktəbə keçid, fraqmentlər və fraksiyalar.",
-      "6-cı sinif": "6-cı sinif üçün qaydalar: Tənliklər və mətndə əsas fikir.",
-      "7-ci sinif": "7-ci sinif üçün qaydalar: İkinci dərəcəli tənliklər və ədəbiyyata giriş.",
-      "8-ci sinif": "8-ci sinif üçün qaydalar: Funksiyalar, fizikanın əsas qanunları.",
-      "9-cu sinif": "9-cu sinif üçün qaydalar: Kvadrat funksiyalar və ədəbiyyat nəzəriyyəsi.",
-      "10-cu sinif": "10-cu sinif üçün qaydalar: Trigonometriya, dil və ədəbiyyatın dərinləşdirilməsi.",
-      "11-ci sinif": "11-ci sinif üçün qaydalar: Ali məktəbə hazırlıq, məntiq və analitik düşüncə."
-    };
-
-    
-const testler ={"4-cü sinif": {
-    "Azərbaycan dili": [
-      { sual: "Azərbaycan dili hansı ailəyə daxildir?", cavablar: ["Slavyan", "Türk", "Roman"], duzgun: "Türk" },
-      
-  {
-    sual: "Nümunədə söz sırası pozulmuşdur. Bu, ədəbi dilin hansı normasının pozulması sayılır?",
-    cavablar: [
-      "fonetik",
-      "qrammatik",
-      "qrammatik və leksik",
-      "leksik",
-      "leksik və fonetik"
-    ],
-    duzgun: "qrammatik"
-  },
-  {
-    sual: "Publisistik üslubun şifahi forması kimi verilənlərdən biri yanlışdır:",
-    cavablar: [
-      "kütləvi jurnalların dili",
-      "radio dili",
-      "televiziya dili",
-      "mitinqlərdə səslənən dil",
-      "natiqlərin dili"
-    ],
-    duzgun: "kütləvi jurnalların dili"
-  },
-  {
-    sual: "İnsan anlayışı bildirən sadə isim hansıdır?",
-    cavablar: [
-      "vətəndaş",
-      "qardaş",
-      "yurddaş",
-      "yoldaş"
-    ],
-    duzgun: "vətəndaş"
-  },
-  {
-    sual: "Uzun saitli sözlər cərgəsini göstərin.",
-    cavablar: [
-      "dəniz, mənzər, araba",
-      "qələm, Təranə, Şəlalə",
-      "sakit, qəmkar, rütubət",
-      "alim, kitab, adam",
-      "maral, səadət, sahil"
-    ],
-    duzgun: "qələm, Təranə, Şəlalə"
-  },
-  {
-    sual: "Cütərkənli müxtəsər cümlə hansıdır?",
-    cavablar: [
-      "Son vaxtlar heç belə danışmamışdım.",
-      "Gecikcəni içəri buraxmamışlar.",
-      "Həyətdəki ağaclar artıq çiçəkləmişdir.",
-      "Yuxarı mərtəbəyə baxmağa ağlıma gəlmədi.",
-      "Yuxarı çıxanda tamam əldən düşmüşdük."
-    ],
-    duzgun: "Son vaxtlar heç belə danışmamışdım."
-  },
-  {
-    sual: "Sözlərdən birində üslubi prinsip pozulmuşdur.",
-    cavablar: [
-      "azadlıq",
-      "mənəvi",
-      "savadlı",
-      "kütləvi",
-      "görüşmək"
-    ],
-    duzgun: "savadlı"
-  },
-  {
-  sual: "“Sara adı xalq üçün ən sevimli ad oldu” (Ə.Cavad) nümunəsində hansı köməkçi nitq hissələrinə aid söz vardır?",
-  cavablar: [
-    "1, 2",
-    "3, 4",
-    "2, 4",
-    "1, 4",
-    "1, 3"
-  ],
-  duzgun: "1, 3"
-},
-{
-  sual: "Sözlərdən biri omonimlik xüsusiyyəti daşıyaraq, isim və fel kimi işlənə bilir.",
-  cavablar: [
-    "ov",
-    "ax",
-    "yox",
-    "yaş",
-    "sarı"
-  ],
-  duzgun: "yaş"
-},
-
- 
-
-
-    ],
-    
-    "Riyaziyyat": [
-      { sual: "15 ÷ 3 neçədir?", cavablar: ["4", "5", "6"], duzgun: "5" },
-      { sual: "18 və 3 ədədlərinin hasilini tapın.", cavablar: ["6", "36", "54", "15"], duzgun: "54" },
-      { sual: "3200 ədədinin səkkizdə bir hissəsini tapın.", cavablar: ["300", "400", "40", "1600"], duzgun: "400" },
-      { sual: "Hesablayın: 2m = 40 sm.",cavablar: ["240 sm", "42 sm", "1980 sm", "160 sm"], duzgun: "240 sm"  },
-      { sual: "3 saat neçə dəqiqədir?", cavablar: ["300 dəqiqə", "30 dəqiqə", "45 dəqiqə", "180 dəqiqə"], duzgun: "180 dəqiqə" },
-      { sual: "Hesablayın: 1908 ÷ 18.", cavablar: ["17", "16", "106", "107"], duzgun: "106" },
-      { sual: "2700 + 3000 – 600 – 8400 ÷ 6 ifadəsinin qiymətini hesablayarkən hansı əməl əvvəl yerinə yetirilir?", cavablar: ["Toplama", "Çıxma", "Vurma", "Bölmə"], duzgun: "Bölmə" },
-      { sual: "2700 + 3000 – 600 – 8400 ÷ 6 ifadəsinin qiymətini hesablayarkən hansı əməl əvvəl yerinə yetirilir?", cavablar: ["Toplama", "Çıxma", "Vurma", "Bölmə"], duzgun: "Bölmə" },
-      { sual: "Hesablayın 1908:8?", cavablar: ["17", "16", "106","107"], duzgun: "106" },
-      { sual: "x-20=100?", cavablar: ["120", "80", "5","107"], duzgun: "120" },
-      { sual: "Tərəfləri 8sm və 6sm olan düzbucaqlının perimetrini tapın", cavablar: ["14", "28", "48","36"], duzgun: "28" },
-      { sual: "2400ün beşdə bir hissəsin tapin", cavablar: ["120", "4800", "480","2405"], duzgun: "480" },
-      { sual: "Hesablayin 2kq-20q", cavablar: ["220q", "1980q", "100q","180q"], duzgun: "1980q" },
-      { sual: "5 ildə neçə ay var", cavablar: ["35", "50", "300","60"], duzgun: "60" },
-      { sual: "Hesablayın 208*9", cavablar: ["1872", "252", "1864","1888"], duzgun: "1872" },
-      { sual: "x+80=400 tənliyini həll edin", cavablar: ["13", "36", "26","24"], duzgun: "26" },
-      { sual: "Tərəfləri 4m və 9m olan düzbucaqlının perimetrini tapın", cavablar: ["13", "36", "26","24"], duzgun: "26" },
-      { sual: "Tərəfləri 4m və 9m olan olan düzbucaqlının sahəsini tapın", cavablar: ["13m", "36m", "26m","18m"], duzgun: "36m" },
-      { sual: "15 + 27 neçə edir?", cavablar: ["32", "42", "52", "62"], duzgun: "42" },
-      { sual: "48 - 19 neçə edir?", cavablar: ["29", "27", "31", "25"], duzgun: "29" },
-      { sual: "6 × 7 neçə edir?", cavablar: ["42", "36", "48", "40"], duzgun: "42" },
-      { sual: "56 ÷ 8 neçə edir?", cavablar: ["6", "7", "8", "9"], duzgun: "7" },
-      { sual: "Tərəfləri 4m və 9m olan düzbucaqlının sahəsini tapın", cavablar: ["13m²", "36m²", "26m²","18m²"], duzgun: "36m²" },
-      { sual: "2m + 35cm neçə sm edir?", cavablar: ["235", "200", "250", "230"], duzgun: "235" },
-      { sual: "120 ÷ 5 neçə edir?", cavablar: ["20", "25", "24", "30"], duzgun: "24" },
-      { sual: "3 saat neçə dəqiqədir?", cavablar: ["180", "300", "120", "90"], duzgun: "180" },
-      { sual: "Tərəfləri 5sm və 3sm olan düzbucaqlının perimetrini tapın", cavablar: ["8", "15", "16","18"], duzgun: "16" },
-      { sual: "50 + 75 - 20 neçə edir?", cavablar: ["105", "95", "115", "100"], duzgun: "105" },
-
-
-    ],
-    "English": [
-      { sual: "Maqnit nəyi cəlb edir?", cavablar: ["Ağacı", "Dəmir", "Plastiki"], duzgun: "Dəmir" }
-    ]
-  },
-
-  "5-ci sinif": {
-    "Azərbaycan dili": [
-      { sual: "“Bahar” sözündə neçə heca var?", cavablar: ["1", "2", "3"], duzgun: "2" }
-    ],
-    "Riyaziyyat": [
-      { sual: "1/2 + 1/2 neçədir?", cavablar: ["1", "2", "0"], duzgun: "1" }
-    ],
-    "Fizika": [
-      { sual: "Elektrik lampası nə ilə işləyir?", cavablar: ["Su", "Elektrik", "Hava"], duzgun: "Elektrik" }
-    ]
-  },
-
-  "6-cı sinif": {
-    "Azərbaycan dili": [
-      { sual: "“Qarabağ” sözündə neçə sait var?", cavablar: ["2", "3", "4"], duzgun: "3" }
-    ],
-    "Riyaziyyat": [
-      { sual: "x + 3 = 5 olarsa, x neçədir?", cavablar: ["1", "2", "3"], duzgun: "2" }
-    ],
-    "Fizika": [
-      { sual: "Qaz hansı halda olur?", cavablar: ["Axıcı", "Sərt", "Yumşaq"], duzgun: "Axıcı" }
-    ]
-  },
-
-  "7-ci sinif": {
-    "Azərbaycan dili": [
-      { sual: "“Bakı” sözündə neçə hərf var?", cavablar: ["3", "4", "5"], duzgun: "4" }
-    ],
-    "Riyaziyyat": [
-      { sual: "2x = 10, x neçədir?", cavablar: ["2", "5", "10"], duzgun: "5" }
-    ],
-    "Fizika": [
-      { sual: "Elektron hansı zərrəciyin növüdür?", cavablar: ["Müsbət", "Mənfi", "Neytral"], duzgun: "Mənfi" }
-    ]
-  },
-
-  "8-ci sinif": {
-    "Azərbaycan dili": [
-      { sual: "“Şuşa” sözündə neçə sait var?", cavablar: ["1", "2", "3"], duzgun: "2" }
-    ],
-    "Riyaziyyat": [
-      { sual: "y = 2x, x = 3 olarsa, y neçədir?", cavablar: ["5", "6", "7"], duzgun: "6" }
-    ],
-    "Fizika": [
-      { sual: "Suyun sıxlığı təxminən neçədir?", cavablar: ["1 g/cm³", "10 g/cm³", "100 g/cm³"], duzgun: "1 g/cm³" }
-    ]
-  },
-
-  "9-cu sinif": {
-    "Azərbaycan dili": [
-      { sual: "“Qarabağ” sözündə neçə hərf var?", cavablar: ["5", "6", "7"], duzgun: "7" }
-    ],
-    "Riyaziyyat": [
-      { sual: "x² = 25 olarsa, x neçə ola bilər?", cavablar: ["5", "±5", "25"], duzgun: "±5" }
-    ],
-    "Fizika": [
-      { sual: "Sürətin vahidi nədir?", cavablar: ["m/s", "kg", "N"], duzgun: "m/s" }
-    ]
-  },
-
-  "10-cu sinif": {
-    "Azərbaycan dili": [
-      { sual: "Azərbaycan dilində neçə sait var?", cavablar: ["6", "9", "12"], duzgun: "9" }
-    ],
-    "Riyaziyyat": [
-      { sual: "sin(90°) neçədir?", cavablar: ["0", "1", "-1"], duzgun: "1" }
-    ],
-    "Fizika": [
-      { sual: "Sürtünməsiz mühitdə cismin sürəti necə dəyişir?", cavablar: ["Sabit qalır", "Artır", "Azalır"], duzgun: "Sabit qalır" }
-    ]
-  },
-
-  "11-ci sinif": {
-    "Azərbaycan dili": [
-      { sual: "Azərbaycan əlifbasında neçə hərf var?", cavablar: ["30", "32", "34"], duzgun: "32" }
-    ],
-    "Riyaziyyat": [
-      { sual: "log₂(8) neçədir?", cavablar: ["2", "3", "4"], duzgun: "3" }
-    ],
-    "Fizika": [
-      { sual: "Sürtünmə qüvvəsi hansı istiqamətdə təsir edir?", cavablar: ["Hərəkət istiqamətində", "Əks istiqamətdə", "Yuxarı"], duzgun: "Əks istiqamətdə" }
-    ]
-  }
-};
-
-
-    const app = document.getElementById("app");
-
-   
-    function mainMenu() {
-      app.innerHTML = "<h2>Seçim et</h2>";
-      let btn1 = document.createElement("button");
-      btn1.className = "btn";
-      btn1.innerText = "📚 Qaydalar";
-      btn1.onclick = showRulesClasses;
-      app.appendChild(btn1);
-
-      let btn2 = document.createElement("button");
-      btn2.className = "btn";
-      btn2.innerText = "📝 Testlər";
-      btn2.onclick = showTestClasses;
-      app.appendChild(btn2);
-    }
-
-    function showRulesClasses() {
-      app.innerHTML = "<h2>Sinif seç (Qaydalar)</h2>";
-      for (let sinif in qaydalar) {
-        let btn = document.createElement("button");
-        btn.className = "btn";
-        btn.innerText = sinif;
-        btn.onclick = () => showRules(sinif);
-        app.appendChild(btn);
-      }
-      backButton(mainMenu);
-    }
-
- 
-    function showRules(sinif) {
-      app.innerHTML = `<h2>${sinif} qaydaları</h2>
-        <div class="text-box">${qaydalar[sinif]}</div>`;
-      backButton(showRulesClasses);
-    }
-
-   
-    function showTestClasses() {
-      app.innerHTML = "<h2>Sinif seç (Testlər)</h2>";
-      for (let sinif in testler) {
-        let btn = document.createElement("button");
-        btn.className = "btn";
-        btn.innerText = sinif;
-        btn.onclick = () => showSubjects(sinif);
-        app.appendChild(btn);
-      }
-      backButton(mainMenu);
-    }
-
-   
-    function showSubjects(sinif) {
-      app.innerHTML = `<h2>${sinif} fənləri</h2>`;
-      for (let fən in testler[sinif]) {
-        let btn = document.createElement("button");
-        btn.className = "btn";
-        btn.innerText = fən;
-        btn.onclick = () => startQuiz(sinif, fən);
-        app.appendChild(btn);
-      }
-      backButton(showTestClasses);
-    }
-
- 
-    function startQuiz(sinif, fən) {
-      let suallar = testler[sinif][fən] || [];
-      let index = 0;
-
-      function showQuestion() {
-        if (index >= suallar.length) {
-          app.innerHTML = "<h2>Test bitdi!</h2>";
-          backButton(() => showSubjects(sinif));
-          return;
-        }
-
-        let s = suallar[index];
-        app.innerHTML = `<h3>${fən} (${sinif})</h3><p>${s.sual}</p>`;
-
-        s.cavablar.forEach(cavab => {
-          let btn = document.createElement("button");
-          btn.className = "answer";
-          btn.innerText = cavab;
-          btn.onclick = () => {
-            if (cavab === s.duzgun) btn.classList.add("correct");
-            else btn.classList.add("wrong");
-            setTimeout(() => { index++; showQuestion(); }, 1000);
-          };
-          app.appendChild(btn);
+    <script>
+        // Navbar kölgəsi
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if(window.scrollY > 50) {
+                nav.style.boxShadow = "0 10px 30px rgba(0,0,0,0.1)";
+            } else {
+                nav.style.boxShadow = "none";
+            }
         });
-      }
-      showQuestion();
-    }
 
-    
-    function backButton(callback) {
-      let btn = document.createElement("button");
-      btn.className = "btn";
-      btn.innerText = "← Geri";
-      btn.onclick = callback;
-      app.appendChild(btn);
-    }
+        // Çatbotun qruplaşdırılmış yeni məntiqi
+        const botRules = [
+            {
+                keywords: ["psixoloq", "psixolok", "psixolog", "psixoloğ"],
+                response: "Psixoloq xidməti: 45 dəqiqə 20 manatdır."
+            },
+            {
+                keywords: ["loqoped", "laqoped", "laqopet", "laqapet", "loqopet", "logoped"],
+                response: "Loqoped xidməti: 45 dəqiqə 20 manatdır."
+            },
+            {
+                keywords: ["nedir", "nedi", "nədir", "nədi"],
+                response: "Loqoped (və ya laqapet), nitq və danışıq qüsurları olan insanlara diaqnoz qoyan və onların dil bacarıqlarını yaxşılaşdıran mütəxəssisdir."
+            },
+            {
+                keywords: ["daye", "dayə", "baxıcı", "baxici"],
+                response: "Növbətçi Dayə xidməti: 1 saatı 25 manatdır."
+            },
+            {
+                keywords: ["pedaqoq", "pidaqoq", "müəllim", "muellim"],
+                response: "Özəl pedaqoq xidməti: 45 dəqiqə 25 manatdır."
+            },
+            {
+                keywords: ["qiymet", "qiymət", "neçəyə", "neceye", "neçədi"],
+                response: "Qiymətlərimiz: Psixoloq (20 AZN), Loqoped (20 AZN), Dayə (25 AZN), Pedaqoq (25 AZN)."
+            },
+            {
+                keywords: ["salam", "sağ ol", "sag ol", "təşəkkür"],
+                response: "Salam! Sizə Kids Center xidmətləri barədə məlumat verə bilərəm. Nə ilə maraqlanırsınız?"
+            },
+            {
+                keywords: ["əlaqə", "elaqe", "nömrə", "nomre", "telefon"],
+                response: "Bizimlə əlaqə: +994 55 390 69 70"
+            }
+        ];
 
-    
-    mainMenu();
-    function startQuiz(sinif, fən) {
-  let suallar = testler[sinif][fən] || [];
-  let index = 0;
+        const chatWindow = document.getElementById('chat-window');
+        const chatMsgs = document.getElementById('chat-msgs');
+        const chatInput = document.getElementById('chat-input');
 
-  function showQuestion() {
-    if (index >= suallar.length) {
-      app.innerHTML = "<h2>Test bitdi!</h2>";
-      backButton(() => showSubjects(sinif));
-      return;
-    }
-
-    let s = suallar[index];
-    app.innerHTML = `<h3>${fən} (${sinif})</h3><p>${s.sual}</p>`;
-
-    s.cavablar.forEach(cavab => {
-      let btn = document.createElement("button");
-      btn.className = "answer";
-      btn.innerText = cavab;
-      btn.onclick = () => {
-       
-        document.querySelectorAll(".answer").forEach(b => b.disabled = true);
-
-        if (cavab === s.duzgun) {
-          btn.classList.add("correct");
-        } else {
-          btn.classList.add("wrong");
-         
-          document.querySelectorAll(".answer").forEach(b => {
-            if (b.innerText === s.duzgun) b.classList.add("correct");
-          });
+        function toggleChat() {
+            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        setTimeout(() => { 
-          index++; 
-          showQuestion(); 
-        }, 1000);
-      };
-      app.appendChild(btn);
-    });
-  }
+        function sendMessage() {
+            const userInput = chatInput.value.trim();
+            if (!userInput) return;
 
-  showQuestion();
-}
-function startQuiz(sinif, fən) {
-  let suallar = testler[sinif][fən] || [];
-  let index = 0;
-  let duzgunSayi = 0;
-  let sehvSayi = 0;
+            addMessage(userInput, 'user-msg');
+            chatInput.value = '';
 
-  function showQuestion() {
-    if (index >= suallar.length) {
-      app.innerHTML = `<h2>Test bitdi!</h2>
-                       <p>Düzgün cavablar: ${duzgunSayi}</p>
-                       <p>Səhv cavablar: ${sehvSayi}</p>`;
-      backButton(() => showSubjects(sinif));
-      return;
-    }
+            const text = userInput.toLowerCase();
+            let response = "Üzr istəyirəm, bu barədə məlumat tapa bilmədim. Zəhmət olmasa WhatsApp-dan yazın: +994 55 390 69 70";
 
-    let s = suallar[index];
-    app.innerHTML = `<h3>${fən} (${sinif})</h3><p>${s.sual}</p>`;
+            // Açar sözləri yoxlayırıq
+            for (let rule of botRules) {
+                const found = rule.keywords.some(key => text.includes(key));
+                if (found) {
+                    response = rule.response;
+                    break;
+                }
+            }
 
-    s.cavablar.forEach(cavab => {
-      let btn = document.createElement("button");
-      btn.className = "answer";
-      btn.innerText = cavab;
-
-      btn.onclick = () => {
-        document.querySelectorAll(".answer").forEach(b => b.disabled = true);
-
-        if (cavab === s.duzgun) {
-          btn.classList.add("correct");
-          duzgunSayi++;
-        } else {
-          btn.classList.add("wrong");
-          sehvSayi++;
-          document.querySelectorAll(".answer").forEach(b => {
-            if (b.innerText === s.duzgun) b.classList.add("correct");
-          });
+            setTimeout(() => addMessage(response, 'bot-msg'), 500);
         }
 
-        setTimeout(() => { 
-          index++; 
-          showQuestion(); 
-        }, 1000);
-      };
-
-      app.appendChild(btn);
-    });
-  }
-
-  showQuestion();
-}
-function startQuiz(sinif, fən) {
-  let suallar = testler[sinif][fən] || [];
-  let index = 0;
-  let duzgunSayi = 0;
-  let sehvSayi = 0;
-  let bal = 0; 
-
-  function showQuestion() {
-    if (index >= suallar.length) {
-      bal = duzgunSayi; 
-      app.innerHTML = `<h2>Test bitdi!</h2>
-                       <p>Düzgün cavablar: ${duzgunSayi}</p>
-                       <p>Səhv cavablar: ${sehvSayi}</p>
-                       <p>Bal: ${bal} / ${suallar.length}</p>`;
-      backButton(() => showSubjects(sinif));
-      return;
-    }
-
-    let s = suallar[index];
-    app.innerHTML = `<h3>${fən} (${sinif})</h3><p>${s.sual}</p>`;
-
-    s.cavablar.forEach(cavab => {
-      let btn = document.createElement("button");
-      btn.className = "answer";
-      btn.innerText = cavab;
-
-      btn.onclick = () => {
-        document.querySelectorAll(".answer").forEach(b => b.disabled = true);
-
-        if (cavab === s.duzgun) {
-          btn.classList.add("correct");
-          duzgunSayi++;
-        } else {
-          btn.classList.add("wrong");
-          sehvSayi++;
-          document.querySelectorAll(".answer").forEach(b => {
-            if (b.innerText === s.duzgun) b.classList.add("correct");
-          });
+        function addMessage(text, className) {
+            const div = document.createElement('div');
+            div.className = 'msg ' + className;
+            div.innerText = text;
+            chatMsgs.appendChild(div);
+            chatMsgs.scrollTop = chatMsgs.scrollHeight;
         }
-
-        setTimeout(() => { 
-          index++; 
-          showQuestion(); 
-        }, 1000);
-      };
-
-      app.appendChild(btn);
-    });
-  }
-
-  showQuestion();
-}
-       
-  </script>
-
+    </script>
 </body>
 </html>
