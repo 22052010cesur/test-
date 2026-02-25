@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="az">
 <head>
@@ -9,6 +8,96 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
+       .faq-clean{
+  max-width:900px;
+  margin:auto;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.faq-row{
+  border-bottom:1px solid #e5e7eb;
+}
+
+.faq-row input{
+  display:none;
+}
+
+.faq-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 10px;
+  cursor:pointer;
+  font-size:18px;
+  font-weight:600;
+  color:#111827;
+  transition:.25s;
+}
+
+.faq-title:hover{
+  background:#f9fafb;
+}
+
+.arrow{
+  transition:.3s;
+  font-size:18px;
+}
+
+.faq-row input:checked + .faq-title .arrow{
+  transform:rotate(90deg);
+}
+
+/* main content */
+.faq-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+  background:#fafafa;
+}
+
+.faq-row input:checked ~ .faq-content{
+  max-height:1000px;
+}
+
+/* sub items */
+.sub-row{
+  border-top:1px solid #eee;
+}
+
+.sub-row input{
+  display:none;
+}
+
+.sub-title{
+  display:flex;
+  justify-content:space-between;
+  padding:14px 30px;
+  cursor:pointer;
+  font-weight:500;
+  color:#374151;
+}
+
+.sub-title:hover{
+  background:#f3f4f6;
+}
+
+.sub-row input:checked + .sub-title .arrow{
+  transform:rotate(90deg);
+}
+
+.sub-content{
+  max-height:0;
+  overflow:hidden;
+  padding:0 45px;
+  font-size:14px;
+  color:#6b7280;
+  transition:max-height .3s ease, padding .25s;
+}
+
+.sub-row input:checked ~ .sub-content{
+  max-height:200px;
+  padding:10px 45px 18px;
+}
         :root {
             --primary: #6c5ce7;
             --secondary: #00cec9;
@@ -129,8 +218,6 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
-
-        /* Kurslar */
         .courses { padding: 100px 0; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
 
@@ -141,7 +228,7 @@
         }
 
         .card {
-            background: white;
+            background: #fafafa;
             padding: 40px;
             border-radius: 30px;
             text-align: center;
@@ -151,12 +238,10 @@
 
         .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .card i { font-size: 50px; margin-bottom: 20px; display: block; }
-
-        /* Haqqımızda */
+.avaut { padding: 100px 0; background: white; }
+        .avout-content { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.2rem; line-height: 1.8; }
         .about { padding: 100px 0; background: white; }
         .about-content { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.2rem; line-height: 1.8; }
-
-        /* Əlaqə Bölməsi */
         .contact {
             padding: 100px 0;
             background: var(--primary);
@@ -243,20 +328,103 @@
         #chat-input-area { display: flex; padding: 15px; border-top: 1px solid #eee; background: white; }
         #chat-input { flex: 1; border: none; outline: none; font-size: 15px; }
         #chat-send { background: none; border: none; color: var(--primary); font-weight: bold; cursor: pointer; font-size: 16px; }
+        .menu{
+  max-width:500px;
+  margin:auto;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  overflow:hidden;
+}
+
+.item{
+  border-bottom:1px solid #eee;
+}
+
+.item input{
+  display:none;
+}
+
+.item label{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.25s;
+}
+
+.item label:hover{
+  background:#f8fafc;
+}
+
+.arrow{
+  transition:.3s;
+}
+
+/* content */
+.content{
+  max-height:0;
+  overflow:hidden;
+  background:#fafafa;
+  transition:max-height .35s ease;
+}
+
+.item input:checked ~ .content{
+  max-height:500px;
+}
+
+/* arrow rotate */
+.item input:checked + label .arrow{
+  transform:rotate(90deg);
+}
+
+/* sub menu */
+.sub-item{
+  padding:12px 30px;
+  border-top:1px solid #eee;
+  font-weight:500;
+  color:#555;
+  cursor:pointer;
+}
+
+.sub-item:hover{
+  background:#f1f5f9;
+}
+.lang-toggle{
+  padding:6px 12px;
+  border:none;
+  border-radius:8px;
+  background:#ffff;
+  color:#000000;
+  cursor:pointer;
+  font-weight:600;
+  left: 20;
+  position: relative;
+}
+
+.lang-toggle:hover{
+  opacity:.9;
+}
+
     </style>
 </head>
 <body>
 
     <nav>
         <div class="container">
-            <a href="#" class="logo">🚀 <span>Kids center</span></a>
+            <a href="#" class="logo"> <span>Kids center</span></a>   
+             <button id="langToggle" class="lang-toggle">AZ</button>
             <ul class="nav-links">
                 <li><a href="#home">Ana Səhifə</a></li>
                 <li><a href="#courses">Kurslar</a></li>
                 <li><a href="#photo">Qiymetler</a></li>
                 <li><a href="#about">Haqqımızda</a></li>
-                <li><a href="#contact" class="btn-reg">Əlaqə</a></li>
+                 <li><a href="#avout">sual-cavab</a></li>
+                 <li><a href="#contact" class="btn-reg">Əlaqə</a></li>
             </ul>
+ 
         </div>
     </nav>
 
@@ -267,7 +435,7 @@
                 <a href="#contact" class="btn-reg" style="padding: 18px 40px; font-size: 1.1rem; text-decoration: none; display: inline-block;">Əlaqə</a>
             </div>
             <div class="hero-img">
-                <img src="https://uploads.onecompiler.io/43d7y9waz/44b3c8y78/BADa99FEE-4CF6-49F1-A2F3-EC6F283784E3.jpg" alt="Hero">
+                <img src="BADa99FEE-4CF6-49F1-A2F3-EC6F283784E3.jpg" alt="Hero">
             </div>
         </div>
     </section>
@@ -276,10 +444,10 @@
         <div class="container">
             <h2 class="section-title">Populyar Bölmələrimiz</h2>
             <div class="course-grid">
-                <div class="card"><i class="fas fa-robot" style="color:#fd79a8"></i><h3>Psixoloq</h3><p></p></div>
-                <div class="card"><i class="fas fa-language" style="color:#00b894"></i><h3>İngilis Dili</h3><p>Oyunla öyrənmə.</p></div>
-                <div class="card"><i class="fas fa-paint-brush" style="color:#0984e3"></i><h3>İncəsənət</h3><p>Rəsm və yaradıcılıq.</p></div>
-                <div class="card"><i class="fas fa-brain" style="color:#e17055"></i><h3>Məntiq</h3><p>Sürətli hesablama.</p></div>
+                <div class="card"><img src="https://uploads.onecompiler.io/43d7y9waz/44ekru73k/images.jpg"width="50%"><h3>Psixoloq</h3><p></p></div>
+                <div class="card"><img src="https://uploads.onecompiler.io/43d7y9waz/44ekru73k/images%20(1).jpg"width="80%"><h3>Pedaqoq</h3></div>
+                <div class="card"><img src="https://uploads.onecompiler.io/43d7y9waz/44ekru73k/download.jpg" width="70%"><h3>dayə</h3></div>
+                <div class="card"><img src="Untitled.png"width="60%"><h3>Psixoloq</h3></div>
             </div>
         </div>
     </section>
@@ -299,14 +467,230 @@
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title">Haqqımızda</h2>
-            <div class="about-content">
+            <div class="about-content"> 
+                
                 <h2>Kids Center”ın məqsədi xüsusi qayğıya ehtiyacı olan uşaqları bağçaya adaptasiya etmək və valideynlərə dəstək verməkdir.</h2>
                 <p>Kids Center”da təlim prosesinə uşaqlar 2 – 8 yaş aralığında cəlb olunur və uşaqların maraqlarına uyğun olaraq beş qrup fəaliyyət göstərir. Biz həftənin 5 günü 9:00 – dan 18:00 – dək fəaliyyət göstəririk.</p>
                 <p>Burada rüblük uşaq inkişafı qiymətləndirilməsi aparılır və valideynlər üçün hesabatlar hazırlanır.</p>
+                <p>dəfədən çox müxtəlif idrak, mədəni – estetik, nitq, fiziki və sosial-emosional və motor bacarıqlarını inkişaf etdirici məşğələlərə qoşulur və müxtəlif əyləncə və istirahət xarakterli tədbirlərdə iştirak edir.“Special Kids”da uşaqların ehtiyaclarına fərdi yanaşma var. Burada rüblük uşaq inkişafı qiymətləndirilməsi aparılır və valideynlər üçün həftəlik tədris və fəaliyyət hesabatı hazırlanır.“Special Kids”da  uşaqlar üçün gündəlik tibbi nəzarət və pediatr müayinəsi təşkil olunur.  Sanitar – gigiyenik vəziyyətin davamlı yaxşılaşdırılması üçün tədbirlər həyata keçirilir. Bundandan əlavə, bağçada xüsusi təhlükəsizlik tədbirləri görülüb, yanğından mühafizə sistemi var.</p>
+                <img src="https://uploads.onecompiler.io/43d7y9waz/44ekru73k/psixoloq-500x300.jpg"width="30%" height="30%">
+                <img src="https://uploads.onecompiler.io/43d7y9waz/44ekru73k/child-learning-count-home-1-500x300.jpg"width="30%" height="30%">
+                <img src="https://uploads.onecompiler.io/43d7y9waz/44ekru73k/img-5294-500x300.jpg"width="30%" height="30%">
+                 <img src="https://uploads.onecompiler.io/43d7y9waz/44ekru73k/img-5749-500x300.jpg"width="30%" height="30%">
+                 <img src="https://uploads.onecompiler.io/43d7y9waz/44ekru73k/img-4471-500x300.jpg"width="30%" height="30%">
+                 <img src="https://uploads.onecompiler.io/43d7y9waz/44ekru73k/boy-doing-some-mathematical-exercises-500x300.jpg"width="30%" height="30%">
             </div>
         </div>
     </section>
+<section id="avout" class="avout">
+     <div class="container">
+            <h2 class="section-title">Sual-cavab</h2>
+            <div class="about-content"> 
+<div class="faq-clean">
 
+
+  
+<!-- ==== 1 ==== -->
+<div class="faq-row">
+<input type="checkbox" id="m1">
+<label class="faq-title" for="m1">
+  Ümumi məlumat
+  <span class="arrow">›</span>
+</label>
+
+<div class="faq-content">
+
+  <!-- 1 -->
+  <div class="sub-row">
+    <input type="checkbox" id="m1_1">
+    <label class="sub-title" for="m1_1">
+      Uşağımda ASP olub-olmadığını necə bilə bilərəm?
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      <h4>Uşağın davranışını müşahidə edin və narahatlıq olarsa mütəxəssisə müraciət edin.</h4>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="sub-row">
+    <input type="checkbox" id="m1_2">
+    <label class="sub-title" for="m1_2">
+      Ətraf mühit faktorları autizmli uşaqlara təsir edə bilərmi?
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      <h4>Bəli, genetik faktorlarla birlikdə risk arta bilər.</h4>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="sub-row">
+    <input type="checkbox" id="m1_3">
+    <label class="sub-title" for="m1_3">
+      Danışmayan ASP olan uşaq sonradan danışa bilərmi?
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      <h4>Bəli, erkən müdaxilə çox vacibdir.</h4>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="sub-row">
+    <input type="checkbox" id="m1_4">
+    <label class="sub-title" for="m1_4">
+      Görünüşdən ASP anlamaq olarmı?
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      <h4>Xeyr, diaqnoz yalnız mütəxəssis tərəfindən qoyulur.</h4>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="sub-row">
+    <input type="checkbox" id="m1_5">
+    <label class="sub-title" for="m1_5">
+      ASP yaşla inkişaf edə bilərmi?
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      <h4>Düzgün terapiya ilə uşağın bacarıqları inkişaf edə bilər.</h4>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- ==== 2 ==== -->
+<div class="faq-row">
+<input type="checkbox" id="m2">
+<label class="faq-title" for="m2">
+  Təhsil
+  <span class="arrow">›</span>
+</label>
+<div class="faq-content">
+  <div class="sub-row">
+    <input type="checkbox" id="m2_1">
+    <label class="sub-title" for="m2_1">
+      Dərs proqramı
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      Proqram uşaqların yaşına uyğun hazırlanır.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==== 3 ==== -->
+<div class="faq-row">
+<input type="checkbox" id="m3">
+<label class="faq-title" for="m3">
+  Məşğələlər
+  <span class="arrow">›</span>
+</label>
+<div class="faq-content">
+  <div class="sub-row">
+    <input type="checkbox" id="m3_1">
+    <label class="sub-title" for="m3_1">
+      İnkişaf oyunları
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      Uşaqlar üçün inkişaf etdirici oyunlar keçirilir.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==== 4 ==== -->
+<div class="faq-row">
+<input type="checkbox" id="m4">
+<label class="faq-title" for="m4">
+  Qidalanma
+  <span class="arrow">›</span>
+</label>
+<div class="faq-content">
+  <div class="sub-row">
+    <input type="checkbox" id="m4_1">
+    <label class="sub-title" for="m4_1">
+      Menyu
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      Gündəlik balanslı qidalanma təqdim olunur.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==== 5 ==== -->
+<div class="faq-row">
+<input type="checkbox" id="m5">
+<label class="faq-title" for="m5">
+  Sağlamlıq və gigiyena
+  <span class="arrow">›</span>
+</label>
+<div class="faq-content">
+  <div class="sub-row">
+    <input type="checkbox" id="m5_1">
+    <label class="sub-title" for="m5_1">
+      Tibbi nəzarət
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      Uşaqlar gündəlik tibbi nəzarətdə saxlanılır.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==== 6 ==== -->
+<div class="faq-row">
+<input type="checkbox" id="m6">
+<label class="faq-title" for="m6">
+  Təhlükəsizlik
+  <span class="arrow">›</span>
+</label>
+<div class="faq-content">
+  <div class="sub-row">
+    <input type="checkbox" id="m6_1">
+    <label class="sub-title" for="m6_1">
+      Kamera sistemi
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      Mərkəz 24/7 kamera ilə qorunur.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==== 7 ==== -->
+<div class="faq-row">
+<input type="checkbox" id="m7">
+<label class="faq-title" for="m7">
+  Yuxu rejimi
+  <span class="arrow">›</span>
+</label>
+<div class="faq-content">
+  <div class="sub-row">
+    <input type="checkbox" id="m7_1">
+    <label class="sub-title" for="m7_1">
+      Günorta yuxusu
+      <span class="arrow">›</span>
+    </label>
+    <div class="sub-content">
+      Uşaqlar üçün rahat yuxu otağı mövcuddur.
+    </div>
+  </div>
+</div>
+</div>
+            </div>
+</section>
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title" style="color:white">Bizimlə Əlaqə</h2>
@@ -329,7 +713,7 @@
 
                 <div class="qr-card">
                     <div class="qr-frame">
-                        <img src="https://uploads.onecompiler.io/43d7y9waz/44b3c8y78/BADam99FEE-4CF6-49F1-A2F3-EC6F283784E3.jpg" alt="QR">
+                        <img src="BADam99FEE-4CF6-49F1-A2F3-EC6F283784E3.jpg" alt="QR">
                     </div>
                     <h3>Instagram QR Kodu</h3>
                     <p>Skan et və səhifəmizə birbaşa keç!</p>
@@ -350,7 +734,7 @@
             <span onclick="toggleChat()" style="cursor:pointer; font-size: 24px;">&times;</span>
         </div>
         <div id="chat-msgs">
-            <div class="msg bot-msg">Salam! Kids Center-ə xoş gəlmisiniz. Sizin üçün qiymətləri öyrənə bilərəm. Nə ilə maraqlanırsınız?</div>
+            <div class="msg bot-msg">Salam 😊 Kids Center-ə xoş gəlmisiniz! Psixoloq, loqoped, dayə və digər xidmətlərimizin qiymətləri ilə bağlı kömək edə bilərəm. Nə barədə məlumat almaq istərdiniz?</div>
         </div>
         <div id="chat-input-area">
             <input type="text" id="chat-input" placeholder="Məsələn: loqoped qiyməti..." onkeypress="if(event.key==='Enter') sendMessage()">
@@ -368,41 +752,61 @@
                 nav.style.boxShadow = "none";
             }
         });
-
-        // Çatbotun qruplaşdırılmış yeni məntiqi
-        const botRules = [
+        const botRules = [ 
             {
-                keywords: ["psixoloq", "psixolok", "psixolog", "psixoloğ"],
+                keywords: ["psixoloq nedir?","pisxoloq nedir","pisxoloq nedi?","pisixoloq nedi","psixoloq ne?","psixoloq ne","psixoloq nədir?","psixoloq nədi","psixoloq nə" ],
+                response: "Psixoloq, insan psixikasını, davranışlarını, düşüncələrini və emosiyalarını öyrənən, bu biliklərini istifadə edərək fərdlərə və qruplara psixoloji problemlərin həllində, özünü dərk etməsində və rifah halını yaxşılaşdırmasında kömək edən ali təhsilli mütəxəssisdir; dərman təyin etmək hüququ yoxdur, lakin terapiya və konsultasiya yoluyla dəstək olur. "
+            },
+              {
+                 keywords: ["psixoloq ", "psixolok  ", "psixolog  ", "psixoloğ", "psixolok", "psixoloqq", "psixolq", "psixolo", "psixoloqu", "psixoloqla    " ],
                 response: "Psixoloq xidməti: 45 dəqiqə 20 manatdır."
             },
             {
+                keywords: [
+                "laqapet nedir", "laqapet nedi", " lapapet nədir", "laqapet nədi",
+                "laqapet nə","loqoped nedir","loqoped nedi","loqoped ne","loqoped nə",
+                "loqaped nedir","loqaped nedi","loqaped ne"," logoped nedir ",
+                "logoped nedir","logoped ne ", "logopet nnedi","logopet nedir ",
+                " logoped nedi?", "laqapet nedir?","laqapet nedi?",
+                "lapapet nədir?","laqapet nədi?","laqapet nə?","logoped ne"
+
+                ],
+                response: "Loqoped (və ya laqapet), nitq və danışıq qüsurları olan insanlara diaqnoz qoyan və onların dil bacarıqlarını yaxşılaşdıran mütəxəssisdir."
+            },
+                 {
                 keywords: ["loqoped", "laqoped", "laqopet", "laqapet", "loqopet", "logoped"],
                 response: "Loqoped xidməti: 45 dəqiqə 20 manatdır."
             },
-            {
-                keywords: ["nedir", "nedi", "nədir", "nədi"],
-                response: "Loqoped (və ya laqapet), nitq və danışıq qüsurları olan insanlara diaqnoz qoyan və onların dil bacarıqlarını yaxşılaşdıran mütəxəssisdir."
-            },
+        
             {
                 keywords: ["daye", "dayə", "baxıcı", "baxici"],
                 response: "Növbətçi Dayə xidməti: 1 saatı 25 manatdır."
-            },
+            }, 
             {
-                keywords: ["pedaqoq", "pidaqoq", "müəllim", "muellim"],
-                response: "Özəl pedaqoq xidməti: 45 dəqiqə 25 manatdır."
+                keywords: ["salam", "salmm", "slm", "slam","slem"],
+                response: "Salam! 🌸 Kids Center-ə xoş gəlmisiniz. Hər hansı xidmət haqqında məlumat istəyirsiniz?"
             },
-            {
-                keywords: ["qiymet", "qiymət", "neçəyə", "neceye", "neçədi"],
-                response: "Qiymətlərimiz: Psixoloq (20 AZN), Loqoped (20 AZN), Dayə (25 AZN), Pedaqoq (25 AZN)."
-            },
-            {
-                keywords: ["salam", "sağ ol", "sag ol", "təşəkkür"],
-                response: "Salam! Sizə Kids Center xidmətləri barədə məlumat verə bilərəm. Nə ilə maraqlanırsınız?"
-            },
+            
+           
             {
                 keywords: ["əlaqə", "elaqe", "nömrə", "nomre", "telefon"],
                 response: "Bizimlə əlaqə: +994 55 390 69 70"
-            }
+            }, 
+            {
+                keywords: ["sagolun", "sagol", "cox sagolun", "sg","sag ol","oldu sagolun","təşəkür edirem","teşekür edirem","tesekur edirem","tsk","muck","təşəkkür edirem","tesekkur edirik","tesekur","tesekur ediriy","çox təşəkkür edirəm","cox tesekkur edirem","sağ ol 😊","təşəkkür 🙏","thanks 👍","sagol❤️" ],
+                response: "Rica edirəm! Kömək edə bildimsə, çox sevindim.,Hər zaman! Lazım olsa, yenə yaz 😉"
+            },
+             {
+                keywords: ["pedaqoq ne", "pedaqoq nedi", "pedaqoq nedir","pedaqoq ne?","pedaqoq nedi?","pedeqoq nedir?","pedaqoq nə","pedaqoq nədi","pedaqoq nədir","pedaqoq nə?","pedaqoq nədir?","pedaqoq nədir?"],
+                response: "Pedaqoq, uşaqların və yeniyetmələrin təlim, tərbiyə və inkişafı ilə məşğul olan təhsil mütəxəssisidir. Bu şəxslər uşaqların əqli, psixoloji inkişafını araşdırır, onlara bilik və bacarıqlar aşılayır, həmçinin valideynlərə övladlarının düzgün tərbiyəsi və təhsili ilə bağlı dəstək (pedaqoji məsləhət) verirlər. "
+            },
+            {
+                keywords: ["pedaqoq", "pedaqoq", "petaqoq",],
+                response: "Özəl pedaqoq xidməti: 45 dəqiqə 25 manatdır."
+            },
+           
+           
+            
         ];
 
         const chatWindow = document.getElementById('chat-window');
@@ -421,9 +825,7 @@
             chatInput.value = '';
 
             const text = userInput.toLowerCase();
-            let response = "Üzr istəyirəm, bu barədə məlumat tapa bilmədim. Zəhmət olmasa WhatsApp-dan yazın: +994 55 390 69 70";
-
-            // Açar sözləri yoxlayırıq
+            let response = "Bu sual bir az spesifikdir 😊 Daha dəqiq cavab üçün WhatsApp-dan yazmağınız daha yaxşı olar:💚 +994 55 390 69 70";
             for (let rule of botRules) {
                 const found = rule.keywords.some(key => text.includes(key));
                 if (found) {
@@ -441,8 +843,76 @@
             div.innerText = text;
             chatMsgs.appendChild(div);
             chatMsgs.scrollTop = chatMsgs.scrollHeight;
+        };
+    
+let currentLang = "az";
+let isTranslating = false;
+
+function getTranslatableElements() {
+  return document.querySelectorAll(
+    "h1, h2, h3, p, a, label, .sub-content, .bot-msg, .section-title"
+  );
+}
+
+
+function storeOriginalTexts() {
+  const elements = getTranslatableElements();
+
+  elements.forEach(el => {
+    if (!el.dataset.original) {
+      el.dataset.original = el.innerText;
+    }
+  });
+}
+
+storeOriginalTexts();
+
+document.getElementById("langToggle").addEventListener("click", async () => {
+  if (isTranslating) return; // spam qoruma
+  isTranslating = true;
+
+  const btn = document.getElementById("langToggle");
+  const targetLang = currentLang === "az" ? "ru" : "az";
+  const elements = getTranslatableElements();
+
+  try {
+    
+    if (targetLang === "az") {
+      elements.forEach(el => {
+        if (el.dataset.original) {
+          el.innerText = el.dataset.original;
         }
-    </script>
+      });
+    } else {
+     
+      const texts = Array.from(elements).map(el => el.dataset.original || "");
+      const joined = texts.join(" ||| ");
+
+      const res = await fetch(
+        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=az&tl=ru&dt=t&q=${encodeURIComponent(joined)}`
+      );
+
+      const data = await res.json();
+      const translated = data[0][0][0].split(" ||| ");
+
+      elements.forEach((el, i) => {
+        if (translated[i]) {
+          el.innerText = translated[i];
+        }
+      });
+    }
+
+    currentLang = targetLang;
+    btn.textContent = currentLang.toUpperCase();
+
+  } catch (e) {
+    console.log("translate error", e);
+  }
+
+  isTranslating = false;
+});
+
+  </script>
 </body>
 </html>
 
